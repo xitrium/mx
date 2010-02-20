@@ -149,8 +149,17 @@ public class MolfileReader
     float y = MDLStringKit.extractFloat(line, 10, 20);
     float z = MDLStringKit.extractFloat(line, 20, 30);
     String symbol = MDLStringKit.extractString(line, 31, 34);
-
-    Atom atom = mol.addAtom(symbol, x, y, z);
+    
+    Atom atom = null;
+    
+    if (symbol.equals("D")) //special case for deuterium
+    {
+      atom = mol.addAtom("H", x, y, z);
+      atom.setIsotope(2);
+    } else
+    {
+      atom = mol.addAtom(symbol, x, y, z);
+    }
 
     if (readChargesInAtomBlock)
     {
