@@ -101,8 +101,13 @@ public class MolfileReaderTest extends TestCase
   public void testItShouldReadMonoDeuteroBenzene()
   {
     Molecule mdb = new DefaultMolecule();
-    
-    reader.read(mdb, monoDeuteroBenzene);
+    try
+    {
+      reader.read(mdb, monoDeuteroBenzene);
+    }catch(Exception e)
+    {
+      fail(e.toString());
+    }
     
     assertEquals(12, mdb.countAtoms());
     assertEquals(12, mdb.countBonds());
