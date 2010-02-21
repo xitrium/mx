@@ -38,12 +38,14 @@ import com.metamolecular.mx.model.Superatom;
 
 /**
  * @author Richard L. Apodaca <rapodaca at metamolecular.com>
+ * @author Sean M. Talts <sean.talts@gmail.com>
  */
 public class MolfileReader
 {
 
   private boolean readChargesInAtomBlock;
-
+  private final String DEUTERIUM = "D";
+  
   public MolfileReader()
   {
     readChargesInAtomBlock = false;
@@ -152,7 +154,7 @@ public class MolfileReader
     
     Atom atom = null;
     
-    if (symbol.equals("D")) //special case for deuterium
+    if (DEUTERIUM.equals(symbol)) //special case for deuterium
     {
       atom = mol.addAtom("H", x, y, z);
       atom.setIsotope(2);
